@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kingsley Okoli — QA/SDET Portfolio</title>
+  <meta name="description" content="Results-driven QA/SDET portfolio for Kingsley Okoli. Automated testing, E2E, CI/CD, performance testing, and measurable quality outcomes."/>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="author" content="Kingsley Okoli">
+  <meta name="keywords" content="QA Engineer, SDET, Test Automation, Playwright, Performance Testing, Quality Assurance">
+  <meta property="og:title" content="Kingsley Okoli — QA/SDET Portfolio">
+  <meta property="og:description" content="Results-driven QA/SDET focused on automated testing, CI/CD, and measurable quality outcomes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kingsleyokoli.github.io/portfolio">
+  <meta property="og:image" content="https://kingsleyokoli.github.io/portfolio/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c1117;
+      --surface: #111827;
+      --elev: #0f172a;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --brand: #3b82f6;
+      --brand-2: #22d3ee;
+      --accent: #10b981;
+      --danger: #ef4444;
+      --border: #1f2937;
+      --ring: #94a3b8;
+      --shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html:focus-within { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html:focus-within { scroll-behavior: auto; }
+      .reveal, .fade-in { transition: none !important; animation: none !important; }
+    }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: linear-gradient(180deg, var(--bg), #0a0f15 40%, #0a0f14 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    /* Skip link */
+    .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { position: fixed; left: 1rem; top: 1rem; z-index: 9999; width: auto; height: auto; padding: .75rem 1rem; background: var(--brand); color: #000; border-radius: .5rem; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      backdrop-filter: saturate(1.2) blur(6px);
+      background: rgba(10, 15, 20, .75);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { max-width: 1200px; margin: 0 auto; padding: .75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: .625rem; text-decoration: none; color: var(--text); }
+    .brand .logo { width: 36px; height: 36px; border-radius: 10px; background: radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2)); box-shadow: inset 0 0 10px rgba(255,255,255,.2); }
+    .brand span { font-weight: 800; letter-spacing: .4px; font-size: 1.05rem; }
+
+    nav ul { list-style: none; display: flex; gap: 1.25rem; margin: 0; padding: 0; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: .95rem; }
+    nav a:hover, nav a:focus { color: var(--text); }
+    .cta { 
+      appearance: none; 
+      border: 0; 
+      border-radius: .75rem; 
+      padding: .7rem 1rem; 
+      font-weight: 700; 
+      background: linear-gradient(135deg, var(--brand), var(--brand-2)); 
+      color: #00131a; 
+      box-shadow: var(--shadow);
+      transition: all 0.15s ease;
+      transform: translateY(0);
+      cursor: pointer;
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 50px rgba(0,0,0,.4);
+    }
+    .cta:active {
+      transform: translateY(1px);
+      box-shadow: 0 5px 20px rgba(0,0,0,.5);
+    }
+    .cta.secondary { 
+      background: transparent; 
+      color: var(--text); 
+      border: 1px solid var(--border);
+      transition: all 0.15s ease;
+      transform: translateY(0);
+    }
+    .cta.secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.3);
+    }
+    .cta.secondary:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 15px rgba(0,0,0,.4);
+    }
+
+    /* Direct links spacing */
+    .direct-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .direct-links .cta {
+      margin: 0;
+      text-align: center;
+    }
+
+    /* Mobile nav */
+    .menu-btn { display: none; background: transparent; color: var(--text); border: 1px solid var(--border); padding: .5rem .65rem; border-radius: .5rem; }
+    @media (max-width: 920px) {
+      nav ul { display: none; position: absolute; top: 64px; right: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: .75rem; padding: .75rem; flex-direction: column; width: min(92vw, 320px); }
+      nav ul.open { display: flex; }
+      .menu-btn { display: inline-flex; align-items: center; gap: .5rem; }
+    }
+
+    /* Sections */
+    main { display: block; }
+    section { padding: clamp(56px, 8vw, 96px) 1rem; border-bottom: 1px solid var(--border); }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; color: var(--muted); font-weight: 700; }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); margin: .25rem 0 1rem; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin: 0 0 1rem; }
+    h3 { font-size: clamp(1.1rem, 2.6vw, 1.35rem); margin: .4rem 0 .3rem; }
+    p.lead { font-size: clamp(1rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 72ch; }
+
+    /* Hero */
+    #home { background: radial-gradient(80vw 50vw at 20% -10%, rgba(59,130,246,.18), transparent 60%), radial-gradient(50vw 30vw at 90% 20%, rgba(34,211,238,.15), transparent 60%); }
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center; }
+    .hero-card { background: linear-gradient(180deg, var(--surface), rgba(17,24,39,.6)); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem; }
+    .buttons { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+    @media (max-width: 980px){ .hero { grid-template-columns: 1fr; } }
+
+    .badges { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .75rem; }
+    .badge { background: var(--elev); border: 1px solid var(--border); border-radius: .75rem; padding: .9rem; text-align: left; }
+    .badge strong { display: block; font-size: 1.2rem; }
+    .meta { color: var(--muted); font-size: .9rem; }
+
+    /* Cards grid */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: span 12; }
+    @media (max-width: 960px) {
+      .col-4, .col-6, .col-8 { grid-column: span 12; }
+    }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem; box-shadow: var(--shadow); }
+    .card h3 { margin-top: .25rem; }
+    .chip { display: inline-block; padding: .25rem .5rem; border: 1px solid var(--border); border-radius: .5rem; font-size: .8rem; color: var(--muted); margin: .15rem .25rem .15rem 0; }
+
+    /* Process */
+    .steps { counter-reset: step; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+    .step { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem 1rem 1rem 3.25rem; }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; left: 1rem; top: 1rem; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: .6rem; background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #00131a; font-weight: 800; }
+    @media (max-width: 960px){ .steps { grid-template-columns: 1fr; } }
+
+    /* Case Studies */
+    .case { display: grid; grid-template-columns: 1fr; gap: .5rem; }
+    .case ul { padding-left: 1rem; margin: .35rem 0; }
+    .case li { margin: .25rem 0; }
+
+    /* FAQ */
+    details { background: var(--surface); border: 1px solid var(--border); border-radius: .75rem; padding: .75rem 1rem; }
+    details + details { margin-top: .75rem; }
+    summary { cursor: pointer; font-weight: 700; }
+    details[open] { outline: 2px solid var(--ring); }
+
+    /* Contact */
+    form { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    label { font-weight: 600; font-size: .9rem; }
+    input, textarea, select { 
+      width: 100%; 
+      background: #0b1320; 
+      border: 1px solid var(--border); 
+      border-radius: .6rem; 
+      color: var(--text); 
+      padding: .7rem .8rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    .full { grid-column: span 2; }
+    .helper { color: var(--muted); font-size: .85rem; }
+    .error { color: var(--danger); font-size: .85rem; }
+
+    /* Footer */
+    footer { padding: 2rem 1rem; background: #080c11; color: var(--muted); border-top: 1px solid var(--border); }
+    footer .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 1rem; max-width: 1200px; margin: 0 auto; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* Subtle reveals */
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* Utilities */
+    .mt-0{ margin-top: 0; } .mb-0{ margin-bottom: 0; } .mt-1{ margin-top: .25rem;} .mt-2{ margin-top: .5rem;} .mt-3{ margin-top: .75rem;} .mt-4{ margin-top: 1rem;}
+    .mb-1{ margin-bottom: .25rem;} .mb-2{ margin-bottom: .5rem;} .mb-3{ margin-bottom: .75rem;} .mb-4{ margin-bottom: 1rem;}
+    .center { text-align: center; }
+    .muted { color: var(--muted); }
+    .nowrap{ white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <a href="#home" class="skip-link">Skip to main content</a>
+  <header role="banner">
+    <div class="nav" aria-label="Primary">
+      <a class="brand" href="#home" aria-label="Kingsley Okoli Home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Kingsley&nbsp;Okoli — QA/SDET</span>
+      </a>
+      <nav role="navigation" aria-label="Main navigation">
+        <button class="menu-btn" aria-expanded="false" aria-controls="menu">☰ <span class="nowrap">Menu</span></button>
+        <ul id="menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">How I Work</a></li>
+          <li><a href="#why">Why Me</a></li>
+          <li><a href="#cases">Case Studies</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" tabindex="-1">
+    <!-- Hero -->
+    <section aria-labelledby="hero-title" id="hero">
+      <div class="container hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Results-Driven Quality Engineering</p>
+          <h1 id="hero-title">I build QA systems that ship faster, break less, and prove it with numbers.</h1>
+          <p class="lead">QA/SDET focused on automated end‑to‑end testing, reliable CI/CD, performance validation, and clear reporting. I turn test strategy into stable releases and measurable quality outcomes.</p>
+          <div class="buttons">
+            <a class="cta" href="#contact">Let's Talk</a>
+            <a class="cta secondary" href="#services">Our Services</a>
+          </div>
+          <div class="badges mt-4" role="list" aria-label="Highlights">
+            <div class="badge" role="listitem"><strong>Playwright&nbsp;TS</strong><span class="meta">E2E suites, visual + API</span></div>
+            <div class="badge" role="listitem"><strong>CI/CD</strong><span class="meta">GitHub Actions, Jenkins</span></div>
+            <div class="badge" role="listitem"><strong>Perf &amp; Load</strong><span class="meta">k6 &amp; Web Vitals</span></div>
+          </div>
+        </div>
+        <aside class="hero-card reveal" aria-label="Quality snapshot">
+          <h3 class="mt-0">Quality snapshot</h3>
+          <p class="muted mb-3">Targets I design for product teams:</p>
+          <div class="grid">
+            <div class="col-6"><div class="badge"><strong>↓ Defect leakage</strong><span class="meta">Protect prod via gates</span></div></div>
+            <div class="col-6"><div class="badge"><strong>↑ Coverage</strong><span class="meta">Critical paths first</span></div></div>
+            <div class="col-6"><div class="badge"><strong>Fast feedback</strong><span class="meta">PR checks < ~8m</span></div></div>
+            <div class="col-6"><div class="badge"><strong>Clear reporting</strong><span class="meta">Dashboards & trends</span></div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" aria-labelledby="services-title">
+      <div class="container">
+        <p class="eyebrow">Services</p>
+        <h2 id="services-title">What I Deliver</h2>
+        <p class="lead">Hands‑on QA/SDET services tailored to your stack and release cadence. I embed with engineering to prevent regressions, accelerate releases, and surface risk early.</p>
+        <div class="grid mt-4">
+          <article class="card col-6 reveal" aria-labelledby="srv-auto">
+            <span class="chip">Automation</span>
+            <h3 id="srv-auto">Automated Testing</h3>
+            <p>Robust Playwright (TypeScript) frameworks for web apps and APIs. Stable selectors, test data factories, fixtures, visual checks, and parallelized suites.</p>
+            <p class="muted">Tools: Playwright, TypeScript, Node, REST/GraphQL, TestRail, Allure, GitHub Actions</p>
+          </article>
+          <article class="card col-6 reveal" aria-labelledby="srv-manual">
+            <span class="chip">Exploratory</span>
+            <h3 id="srv-manual">Manual &amp; Exploratory QA</h3>
+            <p>Deep exploratory testing guided by risk heuristics. Clear reproduction steps, impact notes, environment tagging, and high‑signal bug reports.</p>
+            <p class="muted">Tools: Jira, TestRail, Session charters, Postman</p>
+          </article>
+
+          <article class="card col-6 reveal" aria-labelledby="srv-e2e">
+            <span class="chip">Release safety</span>
+            <h3 id="srv-e2e">End‑to‑End &amp; Integration</h3>
+            <p>Critical‑path coverage mapped to user journeys. API‑first integration tests to isolate failures and keep E2E stable and fast.</p>
+            <p class="muted">Patterns: test pyramid, contract tests, idempotent seeds</p>
+          </article>
+          <article class="card col-6 reveal" aria-labelledby="srv-ci">
+            <span class="chip">DevEx</span>
+            <h3 id="srv-ci">CI/CD &amp; Quality Gates</h3>
+            <p>Reliable pipelines with parallelization, flaky test quarantine, and status checks. Ship with confidence using branch protections and auto‑generated reports.</p>
+            <p class="muted">Tools: GitHub Actions, Jenkins, Docker, Codecov</p>
+          </article>
+
+          <article class="card col-6 reveal" aria-labelledby="srv-perf">
+            <span class="chip">Reliability</span>
+            <h3 id="srv-perf">Performance &amp; Load Testing</h3>
+            <p>k6 scenarios for smoke, load, and stress tests. Track trends and budgets; add perf gates to CI to prevent slowdowns from shipping.</p>
+            <p class="muted">Tools: k6, Web Vitals, Lighthouse CI, Grafana</p>
+          </article>
+          <article class="card col-6 reveal" aria-labelledby="srv-strategy">
+            <span class="chip">Strategy</span>
+            <h3 id="srv-strategy">Test Strategy &amp; QA Metrics</h3>
+            <p>Right‑sized QA strategy, KPI definition (defect leakage, MTTR, coverage), and reporting that leaders can act on.</p>
+            <p class="muted">Artifacts: Strategy docs, traceability matrices, dashboards</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How I Work -->
+    <section id="process" aria-labelledby="process-title">
+      <div class="container">
+        <p class="eyebrow">How I Work</p>
+        <h2 id="process-title">Step‑by‑Step Quality Lifecycle</h2>
+        <div class="steps mt-4">
+          <div class="step reveal"><h3>Test Planning</h3><p>Align on scope, risk, exit criteria, and environments. Define critical paths and non‑negotiables.</p></div>
+          <div class="step reveal"><h3>Requirements Analysis</h3><p>Clarify acceptance criteria, data states, and integrations. Add testability hooks early.</p></div>
+          <div class="step reveal"><h3>Test Design</h3><p>Create lean, high‑value test sets. Build fixtures, page objects, and reusable flows.</p></div>
+          <div class="step reveal"><h3>Execution</h3><p>Parallelize suites in CI. Combine E2E, API, and unit coverage for fast feedback.</p></div>
+          <div class="step reveal"><h3>Reporting</h3><p>Automated summaries with pass/fail, failure clusters, flakes, and trend deltas.</p></div>
+          <div class="step reveal"><h3>Defect Triage</h3><p>Reproduce, minimize, prioritize. Partner with devs for root cause and prevention.</p></div>
+          <div class="step reveal"><h3>QA Metrics</h3><p>Track defect leakage, coverage, MTTR, build stability, and release readiness.</p></div>
+          <div class="step reveal"><h3>Continuous Improvement</h3><p>Quarantine flakies, refactor tests, evolve gates as the product and team grow.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Me -->
+    <section id="why" aria-labelledby="why-title">
+      <div class="container">
+        <p class="eyebrow">Why Me</p>
+        <h2 id="why-title">Measurable QA outcomes, not just more tests</h2>
+        <div class="grid mt-4">
+          <div class="card col-6 reveal">
+            <h3>Reduce Defect Leakage</h3>
+            <p>Gate risky changes and catch regressions before they hit production. Focus on critical user journeys and high‑risk integrations.</p>
+          </div>
+          <div class="card col-6 reveal">
+            <h3>High‑Signal Coverage</h3>
+            <p>Lean, stable suites that run fast and fail for the right reasons. Prioritize tests that guard revenue and reliability.</p>
+          </div>
+          <div class="card col-6 reveal">
+            <h3>Up‑to‑Date Tooling</h3>
+            <p>Playwright TS, k6, GitHub Actions/Jenkins, TestRail, Jira, Docker, Postman, BrowserStack. I choose boring, proven tools when it matters.</p>
+          </div>
+          <div class="card col-6 reveal">
+            <h3>Clear Communication</h3>
+            <p>Concise reports, actionable bug write‑ups, and honest risk calls. I collaborate tightly with engineering and product.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="cases" aria-labelledby="cases-title">
+      <div class="container">
+        <p class="eyebrow">Case Studies</p>
+        <h2 id="cases-title">Selected QA Projects</h2>
+        <div class="grid mt-4">
+          <article class="card col-4 reveal case" aria-labelledby="cs-imprint">
+            <h3 id="cs-imprint">Imprint/Lucid — Web Automation</h3>
+            <p class="muted">B2B web platform migrating from Lucid to Imprint naming; focus on brand management and scheduled activities.</p>
+            <ul>
+              <li><strong>Context:</strong> Built and maintained Playwright + TypeScript E2E suite; verified pixel events on new domain rollout.</li>
+              <li><strong>Tools:</strong> Playwright, TypeScript, TestRail, GitHub Actions, Jira.</li>
+              <li><strong>Impact:</strong> Cut manual regression time; enabled PR checks on critical flows; prevented several prod‑bound bugs during rollout.</li>
+            </ul>
+          </article>
+          <article class="card col-4 reveal case" aria-labelledby="cs-sellfire">
+            <h3 id="cs-sellfire">Sellfire — Staging Defect Triage</h3>
+            <p class="muted">Sales scheduling & CRM. Tested on Beta/Staging across web.</p>
+            <ul>
+              <li><strong>Context:</strong> Identified critical <code>400</code> error when creating AE accounts and issues with non‑call activity sales not appearing on the dashboard without refresh.</li>
+              <li><strong>Tools:</strong> Exploratory charters, Postman, Jira, TestRail.</li>
+              <li><strong>Impact:</strong> Reproduced, documented, and prioritized fixes before release; improved dashboard data integrity checks.</li>
+            </ul>
+          </article>
+          <article class="card col-4 reveal case" aria-labelledby="cs-wakeup">
+            <h3 id="cs-wakeup">Wake Up! — Smart Alarm App</h3>
+            <p class="muted">Android app that stops snoozing via inactivity detection and challenges.</p>
+            <ul>
+              <li><strong>Context:</strong> Designed QA strategy from prototype to MVP; mapped user journeys (alarm set → ring → inactivity → secondary alarm).</li>
+              <li><strong>Tools:</strong> Android, Kotlin, Playwright (web admin), k6 (API), Firebase (optional), GitHub Actions.</li>
+              <li><strong>Impact:</strong> Established CI, smoke E2E, and perf budgets; caught critical edge cases in inactivity detection logic.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="container">
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">About Kingsley Okoli</h2>
+        <div class="grid mt-2">
+          <div class="col-8 reveal">
+            <p><strong>QA/SDET</strong> with 5+ years in software quality (QA Analyst → SDET), focused on scalable automation and quality engineering. I build pragmatic test systems that speed up delivery and reduce production risk.</p>
+            <p class="muted">Recent environments: Imprint (web), Sellfire (web), Android (Wake Up!). Comfortable across staging, beta, and production verification.</p>
+            <p class="muted">Certifications (optional placeholders): ISTQB Foundation (TBD), k6 Performance Testing (TBD).</p>
+            <p class="muted">Mission: <em>Ship confidently, learn continuously, and measure what matters.</em></p>
+          </div>
+          <aside class="col-4 reveal hero-card" aria-label="Skills matrix">
+            <h3 class="mt-0">Skills & Tools</h3>
+            <p>
+              <span class="chip">Playwright TS</span>
+              <span class="chip">k6</span>
+              <span class="chip">Jenkins</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Postman</span>
+              <span class="chip">TestRail</span>
+              <span class="chip">Jira</span>
+              <span class="chip">BrowserStack</span>
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog placeholder to mirror Agenxic nav -->
+    <section id="blog" aria-labelledby="blog-title">
+      <div class="container">
+        <p class="eyebrow">Blog</p>
+        <h2 id="blog-title">Writing & Resources</h2>
+        <p class="muted">Coming soon: test strategy templates, Playwright tips, and performance testing guides.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <p class="eyebrow">Frequently Asked Questions</p>
+        <h2 id="faq-title">Questions I get from hiring managers & teams</h2>
+        <details class="reveal">
+          <summary>What's your testing philosophy?</summary>
+          <p>I design <strong>minimal, meaningful</strong> tests that protect the highest‑risk, highest‑value user journeys. Shift left on testability, automate what's stable, and keep feedback loops fast.</p>
+        </details>
+        <details class="reveal">
+          <summary>How do you handle flaky tests?</summary>
+          <p>Quarantine and deflake. Stabilize selectors, add explicit waits only when needed, improve test data isolation, and measure flake rate. No code merges on red unless a known‑flake is quarantined with an owner.</p>
+        </details>
+        <details class="reveal">
+          <summary>What tools do you use?</summary>
+          <p>Playwright (TypeScript) for E2E/API/visuals, k6 for performance, GitHub Actions/Jenkins for CI, TestRail for traceability, Jira for tracking, Postman for API exploration, Docker for parity, BrowserStack for cross‑browser.</p>
+        </details>
+        <details class="reveal">
+          <summary>How do you communicate risk?</summary>
+          <p>Short, honest summaries: scope, status, known defects, risk areas, and release readiness. I include trend deltas and proposed mitigations.</p>
+        </details>
+        <details class="reveal">
+          <summary>Can you work without formal requirements?</summary>
+          <p>Yes. I extract acceptance criteria from user flows, API contracts, and design mocks. I clarify unknowns, then codify tests around the agreed behavior.</p>
+        </details>
+        <details class="reveal">
+          <summary>How quickly can you set up automation?</summary>
+          <p>Initial smoke suite and CI checks can land in a few iterations; full coverage grows alongside the product. I focus on early ROI, not perfect coverage.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Ready to improve release confidence?</h2>
+        <p class="lead">Reach out for opportunities, collaboration, or a quick assessment of your current QA setup.</p>
+        <div class="grid mt-3">
+          <div class="col-8 reveal">
+            <form id="contact-form" action="https://formspree.io/f/xovnqqpp" method="POST" novalidate aria-describedby="form-msg">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" autocomplete="name" required />
+                <div class="helper">Your full name</div>
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+                <div class="helper">We'll reply within 1–2 business days</div>
+              </div>
+              <div class="full">
+                <label for="subject">Subject</label>
+                <input id="subject" name="subject" required />
+              </div>
+              <div class="full">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <div class="full">
+                <button class="cta" type="submit">Send Message</button>
+                <span id="form-msg" role="status" aria-live="polite" class="helper" style="margin-left:.75rem"></span>
+              </div>
+            </form>
+                         <p class="helper mt-3">Your message will be sent directly to my email via Formspree.</p>
+          </div>
+                     <aside class="col-4 reveal hero-card" aria-label="Direct links">
+             <h3 class="mt-0">Direct</h3>
+             <div class="direct-links">
+               <a class="cta secondary" href="mailto:Kingsleyiokoli@gmail.com">Email: kingsleyiokoli@gmail.com</a>
+               <a class="cta secondary" href="https://www.linkedin.com/in/kingsley-okoli/" target="_blank" rel="noopener">LinkedIn</a>
+               <a class="cta secondary" href="https://github.com/KingIKO" target="_blank" rel="noopener">GitHub</a>
+               <a class="cta" href="assets/Kingsley-Okoli-Resume-2024.pdf" download>Download Resume (PDF)</a>
+             </div>
+           </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <strong>Kingsley Okoli</strong> — QA/SDET
+        <div class="mt-2">© <span id="year"></span> Kingsley Okoli. All rights reserved.</div>
+      </div>
+      <div>
+        <a href="#about">About</a> · <a href="#services">Services</a> · <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const menuBtn = document.querySelector('.menu-btn');
+    const menu = document.getElementById('menu');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', String(open));
+      });
+    }
+
+    // Intersection reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Contact form validation and submission
+    const form = document.getElementById('contact-form');
+    const msg = document.getElementById('form-msg');
+    if (form) {
+      form.addEventListener('submit', e => {
+        const data = new FormData(form);
+        const required = ['name','email','subject','message'];
+        
+        // Validate required fields
+        for (const k of required) { 
+          if (!data.get(k)) { 
+            e.preventDefault();
+            msg.textContent = 'Please complete all required fields.'; 
+            msg.className = 'error'; 
+            return; 
+          } 
+        }
+        
+        // Validate email format
+        const email = String(data.get('email')||'');
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { 
+          e.preventDefault();
+          msg.textContent = 'Enter a valid email.'; 
+          msg.className = 'error'; 
+          return; 
+        }
+        
+        // If validation passes, allow form submission and show success message
+        msg.textContent = 'Sending message...'; 
+        msg.className = 'helper';
+      });
+    }
+
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!--
+  Deployment notes:
+  • Save this file as index.html. Place your resume at /assets/Kingsley_Okoli_Resume.pdf.
+  • Host on GitHub Pages, Netlify, or any static host. No build step required.
+  • Replace placeholder metrics with real numbers. Fill Blog later.
+  Accessibility notes:
+  • Landmarks (header, main, footer), ARIA labels, visible focus, color contrast.
+  • Keyboard-friendly nav & skip link; reduced-motion respected.
+  -->
+</body>
+</html>
