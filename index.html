@@ -39,6 +39,16 @@
       html:focus-within { scroll-behavior: auto; }
       .reveal, .fade-in { transition: none !important; animation: none !important; }
     }
+    
+    /* Ensure page starts at top */
+    html, body {
+      scroll-behavior: auto;
+    }
+    
+    /* Prevent unwanted scroll on page load */
+    body {
+      overflow-anchor: none;
+    }
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
@@ -707,6 +717,16 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    // Ensure page loads at top
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+    });
+    
+    // Prevent hash-based scrolling on page load
+    if (window.location.hash) {
+      window.location.hash = '';
+    }
 
     // Contact form validation and submission
     const form = document.getElementById('contact-form');
