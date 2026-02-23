@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kingsley Okoli — QA/SDET Portfolio</title>
-  <meta name="description" content="Results-driven QA/SDET portfolio for Kingsley Okoli. Automated testing, E2E, CI/CD, performance testing, and measurable quality outcomes."/>
+  <title>Kingsley Okoli — QA Engineer Portfolio</title>
+  <meta name="description" content="Results-driven QA Engineer portfolio for Kingsley Okoli. Automated testing, E2E, CI/CD, performance testing, and measurable quality outcomes."/>
   
   <!-- SEO & Social Meta Tags -->
   <meta name="author" content="Kingsley Okoli">
   <meta name="keywords" content="QA Engineer, SDET, Test Automation, Playwright, Performance Testing, Quality Assurance">
-  <meta property="og:title" content="Kingsley Okoli — QA/SDET Portfolio">
-  <meta property="og:description" content="Results-driven QA/SDET focused on automated testing, CI/CD, and measurable quality outcomes.">
+  <meta property="og:title" content="Kingsley Okoli — QA Engineer Portfolio">
+  <meta property="og:description" content="Results-driven QA Engineer focused on automated testing, CI/CD, and measurable quality outcomes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kingiko.github.io/portfolio-website">
   <meta property="og:image" content="https://kingiko.github.io/portfolio-website/assets/og-image.png">
@@ -387,6 +387,48 @@
     .reveal:nth-child(4) { transition-delay: 0.4s; }
     .reveal:nth-child(5) { transition-delay: 0.5s; }
 
+    /* Headshot */
+    .headshot {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--brand);
+      box-shadow: 0 8px 30px rgba(220, 38, 38, 0.3);
+      margin-bottom: 1rem;
+    }
+    .about-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    .about-intro .headshot {
+      flex-shrink: 0;
+    }
+    @media (max-width: 960px) {
+      .about-intro {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* Side projects */
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .9rem;
+      margin-top: .5rem;
+      transition: color 0.2s ease;
+    }
+    .project-link:hover {
+      color: var(--brand-2);
+    }
+
     /* Utilities */
     .mt-0{ margin-top: 0; } .mb-0{ margin-bottom: 0; } .mt-1{ margin-top: .25rem;} .mt-2{ margin-top: .5rem;} .mt-3{ margin-top: .75rem;} .mt-4{ margin-top: 1rem;}
     .mb-1{ margin-bottom: .25rem;} .mb-2{ margin-bottom: .5rem;} .mb-3{ margin-bottom: .75rem;} .mb-4{ margin-bottom: 1rem;}
@@ -401,7 +443,7 @@
     <div class="nav" aria-label="Primary">
       <a class="brand" href="#home" aria-label="Kingsley Okoli Home">
         <span class="logo" aria-hidden="true"></span>
-        <span>Kingsley&nbsp;Okoli — QA/SDET</span>
+        <span>Kingsley&nbsp;Okoli — QA Engineer</span>
       </a>
       <nav role="navigation" aria-label="Main navigation">
         <button class="menu-btn" aria-expanded="false" aria-controls="menu">☰ <span class="nowrap">Menu</span></button>
@@ -410,8 +452,8 @@
           <li><a href="#process">How I Work</a></li>
           <li><a href="#why">Why Me</a></li>
           <li><a href="#cases">Case Studies</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#blog">Blog</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -425,7 +467,7 @@
         <div class="hero-copy reveal">
           <p class="eyebrow">Results-Driven Quality Engineering</p>
           <h1 id="hero-title" class="typing-effect">I build QA systems that ship faster.</h1>
-          <p class="lead">QA/SDET focused on automated end‑to‑end testing, reliable CI/CD, performance validation, and clear reporting. I turn test strategy into stable releases and measurable quality outcomes.</p>
+          <p class="lead">QA Engineer focused on automated end‑to‑end testing, reliable CI/CD, performance validation, and clear reporting. I turn test strategy into stable releases and measurable quality outcomes.</p>
           <div class="buttons">
             <a class="cta" href="#contact">Let's Talk</a>
             <a class="cta secondary" href="#services">My Work</a>
@@ -539,7 +581,16 @@
         <p class="eyebrow">Case Studies</p>
         <h2 id="cases-title">Selected QA Projects</h2>
         <div class="grid mt-4">
-          <article class="card col-4 reveal case" aria-labelledby="cs-imprint">
+          <article class="card col-6 reveal case" aria-labelledby="cs-rapptr">
+            <h3 id="cs-rapptr">Rapptr Labs — Automation Framework Build</h3>
+            <p class="muted">Digital agency building web and mobile products for enterprise clients. Nearly 4 years across two roles (QA Tester → SDET).</p>
+            <ul>
+              <li><strong>Context:</strong> Developed automation scripts covering up to 30% of regression test cases across 10+ projects. Reduced manual testing time and enhanced quality across the full development lifecycle.</li>
+              <li><strong>Tools:</strong> Playwright, TypeScript, Selenium, k6, Postman, TestRail, GitHub Actions, Jenkins, Jira.</li>
+              <li><strong>Impact:</strong> Significantly reduced manual regression effort; improved test coverage across staging, beta, and production; streamlined QA processes in an Agile/DevOps environment.</li>
+            </ul>
+          </article>
+          <article class="card col-6 reveal case" aria-labelledby="cs-imprint">
             <h3 id="cs-imprint">Imprint/Lucid — Web Automation</h3>
             <p class="muted">B2B web platform migrating from Lucid to Imprint naming; focus on brand management and scheduled activities.</p>
             <ul>
@@ -548,7 +599,7 @@
               <li><strong>Impact:</strong> Cut manual regression time; enabled PR checks on critical flows; prevented several prod‑bound bugs during rollout.</li>
             </ul>
           </article>
-          <article class="card col-4 reveal case" aria-labelledby="cs-sellfire">
+          <article class="card col-6 reveal case" aria-labelledby="cs-sellfire">
             <h3 id="cs-sellfire">Sellfire — Staging Defect Triage</h3>
             <p class="muted">Sales scheduling & CRM. Tested on Beta/Staging across web.</p>
             <ul>
@@ -557,7 +608,7 @@
               <li><strong>Impact:</strong> Reproduced, documented, and prioritized fixes before release; improved dashboard data integrity checks.</li>
             </ul>
           </article>
-          <article class="card col-4 reveal case" aria-labelledby="cs-wakeup">
+          <article class="card col-6 reveal case" aria-labelledby="cs-wakeup">
             <h3 id="cs-wakeup">Wake Up! — Smart Alarm App</h3>
             <p class="muted">Android app that stops snoozing via inactivity detection and challenges.</p>
             <ul>
@@ -570,6 +621,31 @@
       </div>
     </section>
 
+    <!-- Side Projects -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <p class="eyebrow">Side Projects</p>
+        <h2 id="projects-title">What I Build Outside of Work</h2>
+        <div class="grid mt-4">
+          <article class="card col-6 reveal" aria-labelledby="proj-hallpass">
+            <span class="chip">Full-Stack</span>
+            <h3 id="proj-hallpass">HallPass — Convention Planning App</h3>
+            <p>A production web app for discovering and planning convention attendance. Built solo from scratch with 620+ conventions, personal dashboards, schedule extraction, and Stripe billing.</p>
+            <p class="muted">Stack: Next.js 14, TypeScript, Tailwind CSS, Supabase (PostgreSQL + Auth + Storage), Stripe, Vercel.</p>
+            <p class="muted">Scale: 13 DB tables, 49 API routes, 4 cron jobs, JWT auth with JWKS verification, web-push notifications.</p>
+            <a class="project-link" href="https://hallpass.me" target="_blank" rel="noopener">Visit HallPass &rarr;</a>
+          </article>
+          <article class="card col-6 reveal" aria-labelledby="proj-beautybox">
+            <span class="chip">Full-Stack</span>
+            <h3 id="proj-beautybox">BeautyBox — Product Sharing App</h3>
+            <p>A beauty product recommendation and sharing platform. Users create curated collections of their favorite products and share them with friends.</p>
+            <p class="muted">Stack: Next.js, TypeScript, Tailwind CSS, Supabase, Vercel.</p>
+            <a class="project-link" href="https://beauty-box-two.vercel.app" target="_blank" rel="noopener">Visit BeautyBox &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- About -->
     <section id="about" aria-labelledby="about-title">
       <div class="container">
@@ -577,9 +653,15 @@
         <h2 id="about-title">About Kingsley Okoli</h2>
         <div class="grid mt-2">
           <div class="col-8 reveal">
-            <p><strong>QA/SDET</strong> with 5+ years in software quality (QA Analyst → SDET), focused on scalable automation and quality engineering. I build pragmatic test systems that speed up delivery and reduce production risk.</p>
-            <p class="muted">Recent environments: Imprint (web), Sellfire (web), Android (Wake Up!). Comfortable across staging, beta, and production verification.</p>
-            <p class="muted">Certifications (optional placeholders): ISTQB Foundation (TBD), k6 Performance Testing (TBD).</p>
+            <div class="about-intro">
+              <!-- TODO: Replace with your actual headshot file -->
+              <img src="assets/headshot.jpg" alt="Kingsley Okoli" class="headshot" loading="lazy" />
+              <div>
+                <p><strong>QA Engineer</strong> with 3+ years in software quality (QA Tester → SDET → QA Engineer), focused on scalable automation and quality engineering. I build pragmatic test systems that speed up delivery and reduce production risk.</p>
+                <p class="muted">Currently at <strong>Sellfire</strong> (New York). Previously spent nearly 4 years at <strong>Rapptr Labs</strong> building automation frameworks across 10+ projects.</p>
+              </div>
+            </div>
+            <p class="muted mt-3">B.S. in Computer Science from Fairleigh Dickinson University. Member of the National Society of Black Engineers (NSBE).</p>
             <p class="muted">Mission: <em>Ship confidently, learn continuously, and measure what matters.</em></p>
           </div>
           <aside class="col-4 reveal hero-card" aria-label="Skills matrix">
@@ -587,6 +669,7 @@
             <p>
               <a href="https://playwright.dev/" target="_blank" rel="noopener noreferrer" class="chip">Playwright TS</a>
               <a href="https://k6.io/" target="_blank" rel="noopener noreferrer" class="chip">k6</a>
+              <a href="https://www.selenium.dev/" target="_blank" rel="noopener noreferrer" class="chip">Selenium</a>
               <a href="https://www.jenkins.io/" target="_blank" rel="noopener noreferrer" class="chip">Jenkins</a>
               <a href="https://github.com/features/actions" target="_blank" rel="noopener noreferrer" class="chip">GitHub Actions</a>
               <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer" class="chip">Docker</a>
@@ -594,18 +677,12 @@
               <a href="https://www.gurock.com/testrail/" target="_blank" rel="noopener noreferrer" class="chip">TestRail</a>
               <a href="https://www.atlassian.com/software/jira" target="_blank" rel="noopener noreferrer" class="chip">Jira</a>
               <a href="https://www.browserstack.com/" target="_blank" rel="noopener noreferrer" class="chip">BrowserStack</a>
+              <a href="https://grafana.com/" target="_blank" rel="noopener noreferrer" class="chip">Grafana</a>
+              <a href="https://allurereport.org/" target="_blank" rel="noopener noreferrer" class="chip">Allure</a>
+              <a href="https://codecov.io/" target="_blank" rel="noopener noreferrer" class="chip">Codecov</a>
             </p>
           </aside>
         </div>
-      </div>
-    </section>
-
-    <!-- Blog placeholder to mirror Agenxic nav -->
-    <section id="blog" aria-labelledby="blog-title">
-      <div class="container">
-        <p class="eyebrow">Blog</p>
-        <h2 id="blog-title">Writing & Resources</h2>
-        <p class="muted">Coming soon: test strategy templates, Playwright tips, and performance testing guides.</p>
       </div>
     </section>
 
@@ -692,11 +769,11 @@
   <footer role="contentinfo">
     <div class="footer-grid">
       <div>
-        <strong>Kingsley Okoli</strong> — QA/SDET
+        <strong>Kingsley Okoli</strong> — QA Engineer
         <div class="mt-2">© <span id="year"></span> Kingsley Okoli. All rights reserved.</div>
       </div>
       <div>
-        <a href="#about">About</a> · <a href="#services">Services</a> · <a href="#contact">Contact</a>
+        <a href="#about">About</a> · <a href="#services">Services</a> · <a href="#projects">Projects</a> · <a href="#contact">Contact</a>
       </div>
     </div>
   </footer>
