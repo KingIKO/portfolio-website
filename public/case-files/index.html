@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
+  <meta name="description" content="Sanitized engineering case files from Kingsley Okoli's AI reliability and quality-systems work.">
+  <title>Sanitized Case Files — Kingsley Okoli</title>
+  <style>
+    :root{--paper:#f3f0e8;--ink:#101517;--muted:#586164;--line:#cbd0c8;--mint:#0a765f;--acid:#d7ff5f;--dark:#07100f;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--sans:Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}a{color:inherit}.top{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(20px,5vw,72px);border-bottom:1px solid var(--line);background:rgba(243,240,232,.94);backdrop-filter:blur(16px)}.top a{text-decoration:none;font:700 12px var(--mono);letter-spacing:.08em;text-transform:uppercase}.top span{color:var(--muted);font:11px var(--mono)}.intro{padding:clamp(80px,12vw,150px) clamp(20px,8vw,120px) 80px;display:grid;grid-template-columns:1.2fr .55fr;gap:8vw;border-bottom:1px solid var(--line)}.eyebrow,.label{font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mint)}h1{margin:18px 0 0;max-width:12ch;font-size:clamp(56px,9vw,132px);line-height:.87;letter-spacing:-.075em;font-weight:600}.intro__note{align-self:end;color:var(--muted);font-size:15px}.case{scroll-margin-top:64px;padding:clamp(80px,10vw,140px) clamp(20px,8vw,120px);border-bottom:1px solid var(--line)}.case:nth-of-type(even){background:var(--dark);color:#eef5f1}.case:nth-of-type(even) .muted,.case:nth-of-type(even) .context{color:#a8b7b0}.case__head{display:grid;grid-template-columns:110px 1fr minmax(260px,.46fr);gap:3vw;align-items:start;margin-bottom:72px}.number{font:700 13px var(--mono);color:var(--mint)}h2{margin:0;max-width:15ch;font-size:clamp(42px,6vw,82px);line-height:.94;letter-spacing:-.055em;font-weight:600}.context{color:var(--muted);font:12px/1.8 var(--mono);text-transform:uppercase;letter-spacing:.08em}.case__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.panel{padding:28px;background:var(--paper);min-height:240px}.case:nth-of-type(even) .panel{background:#0b1715}.case:nth-of-type(even) .label,.case:nth-of-type(even) .number{color:#72f6d1}.panel--claim{grid-column:span 5}.panel--evidence{grid-column:span 7}.panel--system{grid-column:span 7}.panel--limits{grid-column:span 5}.panel h3{margin:18px 0 14px;font-size:24px;letter-spacing:-.03em}.panel p,.panel li{font-size:14px}.panel ul{margin:0;padding-left:18px}.panel li{margin-bottom:10px}.metric-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.metric{padding:9px 11px;border:1px solid currentColor;font:700 11px var(--mono);text-transform:uppercase}.receipt{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;color:var(--muted);font:11px/1.7 var(--mono)}.case:nth-of-type(even) .receipt{color:#92a49d}.footer{padding:60px clamp(20px,8vw,120px);display:flex;justify-content:space-between;gap:24px;font:12px var(--mono)}.footer a{font-weight:700}@media(max-width:760px){.intro,.case__head{grid-template-columns:1fr}.case__head{gap:18px}.number{margin-bottom:8px}.case__grid{display:block;background:transparent;border:0}.panel{margin-bottom:1px}.receipt,.footer{flex-direction:column}.top span{display:none}}
+  </style>
+</head>
+<body>
+  <header class="top"><a href="../">← Portfolio</a><span>Public / employer anonymized / evidence notes</span></header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">Evidence library / 2026</p><h1>Sanitized case files.</h1></div>
+      <p class="intro__note">These write-ups expose the measurement logic, evidence classes, and limitations behind three portfolio claims. Employer names, internal screenshots, source code, ticket identifiers, customer information, and private architecture are intentionally omitted.</p>
+    </section>
+
+    <article class="case" id="agent-system">
+      <div class="case__head"><span class="number">CASE / 01</span><h2>Teaching an AI agent an entire SaaS platform</h2><p class="context">2026<br>Anonymized B2B sales intelligence platform<br>Four production roles<br>190 documented flows</p></div>
+      <div class="case__grid">
+        <section class="panel panel--claim"><span class="label">Claim under review</span><h3>An autonomous regression program can be trusted only when completion and evidence are machine-checkable.</h3><div class="metric-row"><span class="metric">240+ skills</span><span class="metric">190 flows</span><span class="metric">4 roles</span></div></section>
+        <section class="panel panel--evidence"><span class="label">Evidence manifest</span><ul><li>Versioned skill files describing selectors, fixtures, required actions, edge cases, and expected outcomes.</li><li>A progress ledger accounting for each documented flow and its terminal state.</li><li>Deterministic completion checks rejecting shallow passes, unsupported blocked verdicts, and silent skips.</li><li>Observed browser actions and outcomes rather than log-only classification.</li></ul></section>
+        <section class="panel panel--system"><span class="label">Systemic change</span><h3>Move trust out of the prompt.</h3><p>The agent was surrounded by evidence contracts, deterministic turn-boundary gates, versioned executable knowledge, checkpointed progress, and a watchdog process. Reliability came from the surrounding system—not from asking the model to be more careful.</p></section>
+        <section class="panel panel--limits"><span class="label">Disclosure + limits</span><p>Internal execution recordings, selectors, repositories, and product screens cannot be published. “Zero false bug reports” refers to the reviewed full-product program represented by this case, not a universal guarantee for all future agent runs.</p></section>
+      </div>
+      <div class="receipt"><span>SOURCE SNAPSHOT / Career evidence export / 2026-07-10</span><span>PUBLIC EVIDENCE CLASS / Sanitized engineering write-up</span></div>
+    </article>
+
+    <article class="case" id="ci-signal">
+      <div class="case__head"><span class="number">CASE / 02</span><h2>Restoring trust after nineteen red days</h2><p class="context">2026<br>Anonymized B2B sales intelligence platform<br>Six CI runners<br>Shared staging backend</p></div>
+      <div class="case__grid">
+        <section class="panel panel--claim"><span class="label">Claim under review</span><h3>A red suite is useful only when the team can distinguish product failure from infrastructure noise.</h3><div class="metric-row"><span class="metric">19 red days</span><span class="metric">21 failures</span><span class="metric">0 new bugs</span></div></section>
+        <section class="panel panel--evidence"><span class="label">Evidence manifest</span><ul><li>Every failing scenario reproduced in a live browser before classification.</li><li>Failure timing compared against page hydration, backend response delay, and concurrent runner load.</li><li>Known product defects separated from environment-load and timing failures.</li><li>Post-change runs reviewed for restored signal rather than a single lucky green build.</li></ul></section>
+        <section class="panel panel--system"><span class="label">Systemic change</span><h3>Fix the topology, not each symptom.</h3><p>The investigation traced misleading timeouts to a shared staging environment under six-runner load. Timeout floors and execution behavior were tuned at the architecture level instead of weakening individual assertions.</p></section>
+        <section class="panel panel--limits"><span class="label">Disclosure + limits</span><p>The raw CI logs, workflow files, and environment details are private. “Zero new product bugs” is limited to the failures reviewed in this nineteen-day streak; known defects remained classified separately.</p></section>
+      </div>
+      <div class="receipt"><span>SOURCE SNAPSHOT / Career evidence export / 2026-07-10</span><span>PUBLIC EVIDENCE CLASS / Sanitized incident write-up</span></div>
+    </article>
+
+    <article class="case" id="production-forensics">
+      <div class="case__head"><span class="number">CASE / 03</span><h2>Finding failures no single monitor could see</h2><p class="context">2026<br>Anonymized B2B communications platform<br>Exception telemetry<br>Production session replay</p></div>
+      <div class="case__grid">
+        <section class="panel panel--claim"><span class="label">Claim under review</span><h3>A successful browser state can coexist with a failed internal operation.</h3><div class="metric-row"><span class="metric">2 years</span><span class="metric">2,473 errors</span><span class="metric">43 users / 90d</span></div></section>
+        <section class="panel panel--evidence"><span class="label">Evidence manifest</span><ul><li>Exception telemetry established frequency and server-side failure shape.</li><li>Session replay established what affected users actually saw and did.</li><li>Source-level tracing connected the visible success state to the failing internal call.</li><li>A controlled retest overturned the first plausible diagnosis before the verdict was published.</li></ul></section>
+        <section class="panel panel--system"><span class="label">Systemic change</span><h3>Use two lenses and force them to agree.</h3><p>The investigation combined exception telemetry, session replay, source inspection, and live reproduction into a repeatable forensics loop. Each source covered blind spots left by the others.</p></section>
+        <section class="panel panel--limits"><span class="label">Disclosure + limits</span><p>Customer identities, recordings, stack traces, source code, and feature names are omitted. The error and affected-user counts are drawn from the reviewed ninety-day window, while the underlying defect had existed for roughly two years.</p></section>
+      </div>
+      <div class="receipt"><span>SOURCE SNAPSHOT / Career evidence export / 2026-07-10</span><span>PUBLIC EVIDENCE CLASS / Sanitized forensic write-up</span></div>
+    </article>
+  </main>
+  <footer class="footer"><span>Kingsley Okoli / AI Reliability Engineer</span><a href="mailto:kingsleyiokoli@gmail.com?subject=AI%20Reliability%20case%20files">Discuss the evidence →</a></footer>
+</body>
+</html>
