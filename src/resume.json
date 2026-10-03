@@ -1,0 +1,41 @@
+{
+  "headline": "TEST AUTOMATION | INFRASTRUCTURE & RELIABILITY",
+  "summary": "QA engineer who designs test infrastructure and AI-assisted testing workflows. Built and operate the systems used to run an entire company's QA function as its sole QA engineer, combining browser and API automation, continuous integration (CI), and evidence-based verification with ownership of release decisions.",
+  "sellfire": [
+    "Designed and operate the infrastructure supporting company-wide QA as its sole QA engineer. Direct test planning, automated execution, production investigation, and release approval through a combination of conventional test automation and a custom AI agent harness.",
+    "Engineered a Playwright/TypeScript framework covering all three application roles, with parallel CI execution and shared authentication. Grouped tests using the same data on one machine and isolated unstable tests until they passed independently.",
+    "Architected a Claude Code testing harness around documented QA workflows, custom browser tools exposed through Model Context Protocol (MCP), and automated evidence requirements. Use it to direct ticket-based testing while retaining responsibility for test strategy and release decisions.",
+    "Identified 21 ways users at one customer company could access another company's data. Built regression checks to track those findings and verify that administrator-only pages reject unauthorized users.",
+    "Traced approximately 2,300 silently dropped customer changes to server code deployed four hours before its required database update. Documented the incident timeline for engineering to correct deployment ordering.",
+    "Used LogRocket session recordings to investigate actual customer behavior, identifying eight confirmed bugs, including an application failure after releases for users with an existing browser tab open."
+  ],
+  "rapptr": [
+    "Built a client's initial Playwright test suite and automated CI execution from scratch. The client hired me directly because of this work.",
+    "Created a TestRail regression suite and required it to pass before each production deployment."
+  ],
+  "junior": [
+    "Created test plans and regression cases, reproduced defects, and verified fixes. Used SQL to validate application data and workflow states connected to Salesforce."
+  ],
+  "project": [
+    "Independently built and operate a live web application with Next.js and Supabase and an Android application with Flutter, published on Google Play.",
+    "Built automated data discovery and AI verification against original sources before publication. Enforced unique listings, preserved data during duplicate merges, and removed emails and phone numbers before AI processing."
+  ],
+  "skills": [
+    [
+      "Test infrastructure",
+      "Playwright, TypeScript, GitHub Actions, Postman, REST/GraphQL API testing, TestRail"
+    ],
+    [
+      "Code and data",
+      "JavaScript, Node.js, Python, SQL, PostgreSQL, Supabase, Next.js, Flutter"
+    ],
+    [
+      "Diagnostics and AI",
+      "LogRocket, Sentry, SonarQube, Claude Code, custom MCP servers"
+    ]
+  ],
+  "employer": "Sellfire",
+  "previous_employer": "Rapptr Labs",
+  "project_title": "HallPass",
+  "project_url": "https://hallpass.me"
+}

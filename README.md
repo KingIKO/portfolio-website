@@ -1,57 +1,52 @@
-# Kingsley Okoli - AI Reliability Portfolio
+# Kingsley Okoli - Portfolio
 
-A production portfolio for Kingsley Okoli, positioned as an AI Reliability Engineer and Quality Systems Architect.
+A personal portfolio about test infrastructure, AI-assisted testing, and company-wide QA ownership. The design takes its reading-focused direction from Mathieu Flamant's site: a narrow column, serif headings, warm neutral colors, restrained dividers, and light/dark themes.
 
-## What this site is
+## Content
 
-The site presents a single technical thesis: capable automation is not automatically trustworthy. Its case studies and system diagrams show how evidence contracts, deterministic guardrails, observability, executable knowledge, and drift detection turn AI agents into defensible engineering systems.
+- Selected work explains the testing infrastructure, agent harness, and production investigations.
+- AI copy describes the knowledge, tools, verification, and ongoing engineering judgment around the model.
+- Employer names appear in the career history. Case descriptions explain the work without internal product identifiers.
+- HallPass is the only independent project.
+- The public resume follows the approved current resume, with email and LinkedIn contact information and no phone number.
 
-Employer work is anonymized. Public project names and metrics are included only where the underlying source material supports them.
+## Development
 
-## Stack
+React 19, Vite 7, self-hosted Lora and DM Sans, and a small Lucide icon set. No animation runtime, canvas, or third-party font requests.
 
-- React 19
-- Vite 7
-- GSAP + ScrollTrigger
-- Custom Canvas 2D reliability-core visualization
-- Vitest + Testing Library
-- Playwright + axe-core
-- GitHub Pages deployment workflow
-
-## Local development
-
-```bash
+```sh
 npm ci
 npm run dev
 ```
 
 Open `http://127.0.0.1:5173/portfolio-website/`.
 
+## Content and public files
+
+`src/content.js` holds the portfolio copy. `src/resume.json` holds the public resume content. `scripts/build-public-pages.mjs` generates the HTML resume and the existing case-file URLs, and runs during every build.
+
+To regenerate the committed public PDF and social preview after editing their sources:
+
+```sh
+node scripts/build-public-pages.mjs
+npm run dev -- --port 4188 --strictPort
+# In another terminal:
+npm run render:assets
+```
+
+The renderer uses installed Chrome locally and Playwright Chromium in CI. Set `PORTFOLIO_URL` if the local server uses a different address. The full application resume remains outside this repository.
+
 ## Verification
 
-```bash
+```sh
 npm run check
 npm run test:e2e
 ```
 
-`npm run check` runs the unit/component tests and creates a production build. Playwright verifies desktop and mobile rendering, runtime errors, navigation, motion controls, accessibility, CTA visibility, and horizontal overflow.
-
-## Build
-
-```bash
-npm run build
-npm run preview
-```
-
-Vite writes the deployable static site to `dist/`. The configured base path is `/portfolio-website/` for the repository's GitHub Pages URL.
-
-## Résumés
-
-- The anonymized public résumé is generated and committed under `public/` as HTML and PDF.
-- The full application résumé contains the real employer and direct contact details. It is intentionally stored outside this public repository.
+Browser tests run against the production build, on desktop and mobile. They cover theme persistence, keyboard-operated case details, mobile menu focus, old deep links, no-JavaScript content, public artifacts, horizontal overflow, and accessibility in both themes.
 
 ## Deployment
 
-`.github/workflows/pages.yml` verifies the site, builds `dist/`, and deploys the artifact on pushes to `master`. Before the first deployment of this architecture, GitHub Pages must use **GitHub Actions** as its source rather than legacy branch publishing.
+The existing `.github/workflows/pages.yml` checks the site, builds it, tests it in Chromium, and deploys GitHub Pages on pushes to `master`. Pull requests run the same checks without deployment.
 
-The previous direct-to-`master` deployment scripts were removed because they staged arbitrary files and targeted inconsistent branches.
+Production: https://kingiko.github.io/portfolio-website/

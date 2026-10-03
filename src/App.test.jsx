@@ -1,32 +1,46 @@
-import { render, screen, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 
-describe('portfolio shell', () => {
-  it('presents the AI reliability positioning and evidence-led structure', () => {
+beforeEach(() => {
+  localStorage.clear();
+  delete document.documentElement.dataset.theme;
+});
+
+describe('portfolio', () => {
+  it('presents the owner and only HallPass as an independent project', () => {
     render(<App />);
-
-    expect(screen.getByRole('heading', { level: 1, name: 'AI Reliability Engineer' })).toBeInTheDocument();
-    expect(screen.getByText('Quality Systems Architect', { selector: '.hero__role' })).toBeInTheDocument();
-
-    expect(screen.getByRole('navigation', { name: /primary/i })).toBeInTheDocument();
-    expect(screen.getByRole('main')).toBeInTheDocument();
-    expect(screen.getAllByRole('article', { name: /case study/i })).toHaveLength(3);
-    expect(screen.getAllByRole('link', { name: /open sanitized case file/i })).toHaveLength(3);
-    expect(screen.getByRole('region', { name: /systems lab/i })).toBeInTheDocument();
-    expect(screen.getAllByRole('link', { name: /visit hallpass|request private walkthrough/i })).toHaveLength(3);
-    expect(screen.getByRole('heading', { name: 'Hallpass' }).closest('article')).toHaveClass('project-card--featured');
-    expect(screen.getByRole('heading', { name: 'E7 Advisor' }).closest('article')).not.toHaveClass('project-card--featured');
+    expect(screen.getByRole('heading', { level: 1, name: 'I build the systems behind reliable software.' })).toBeVisible();
+    const projects = screen.getByRole('region', { name: 'Independent project' });
+    expect(within(projects).getAllByRole('article')).toHaveLength(1);
+    expect(within(projects).getByRole('link', { name: /visit hallpass/i })).toHaveAttribute('href', 'https://hallpass.me');
+    expect(screen.getByRole('heading', { name: 'Sellfire' })).toBeVisible();
+    expect(screen.getAllByRole('heading', { name: 'Rapptr Labs' })).toHaveLength(2);
   });
 
-  it('exposes motion control and a direct contact path', () => {
+  it('persists the theme preference and restores it on the next visit', () => {
+    const { unmount } = render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: 'Switch to dark mode' }));
+    expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+    expect(localStorage.getItem('portfolio-theme')).toBe('dark');
+    unmount();
     render(<App />);
+    expect(screen.getByRole('button', { name: 'Switch to light mode' })).toBeInTheDocument();
+  });
 
-    expect(screen.getByRole('button', { name: /pause motion/i })).toBeInTheDocument();
-    const contact = screen.getByRole('region', { name: /contact/i });
-    expect(within(contact).getByRole('link', { name: /start a conversation/i })).toHaveAttribute(
-      'href',
-      expect.stringMatching(/^mailto:/)
-    );
+  it('works when the browser blocks preference storage', () => {
+    const get = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked'); });
+    const set = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked'); });
+    try {
+      render(<App />);
+      fireEvent.click(screen.getByRole('button', { name: 'Switch to dark mode' }));
+      expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+    } finally { get.mockRestore(); set.mockRestore(); }
+  });
+
+  it('exposes a direct contact path and public resume', () => {
+    render(<App />);
+    expect(screen.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:kingsleyiokoli@gmail.com');
+    expect(screen.getByRole('link', { name: 'View résumé' })).toHaveAttribute('href', './Kingsley-Okoli-Public-Resume.pdf');
   });
 });

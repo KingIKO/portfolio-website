@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#05080f"/>
-  <path d="M14 15h7v15l14-15h9L29 31l17 18h-10L21 33v16h-7V15Z" fill="#72f6d1"/>
-  <path d="M48 14v9h-3v-6h-6v-3h9ZM16 50v-9h3v6h6v3h-9Z" fill="#d7ff5f"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#f6f4f0"/><text x="32" y="42" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="#252522">KO</text></svg>

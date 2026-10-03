@@ -1,126 +1,110 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('loads the complete evidence-led portfolio without runtime errors', async ({ page }) => {
+test('loads the portfolio without runtime errors and features only HallPass', async ({ page }) => {
   const errors = [];
-  page.on('console', (message) => {
-    if (message.type() === 'error') errors.push(message.text());
-  });
   page.on('pageerror', (error) => errors.push(error.message));
-
+  page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
   await page.goto('./');
-  await expect(page).toHaveTitle(/Kingsley Okoli/);
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('AI Reliability Engineer');
-  await expect(page.getByRole('article', { name: /Case study/ })).toHaveCount(3);
-  await expect(page.getByRole('region', { name: 'Systems lab' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('I build the systems behind reliable software.');
+  const project = page.getByRole('region', { name: 'Independent project' });
+  await expect(project.getByRole('article')).toHaveCount(1);
+  await expect(project.getByRole('link', { name: 'Visit HallPass' })).toHaveAttribute('href', 'https://hallpass.me');
   expect(errors).toEqual([]);
 });
 
-test('offers a usable fallback when JavaScript is unavailable', async ({ browser }) => {
+test('case studies open by keyboard and reveal the verification method', async ({ page }) => {
+  await page.goto('./');
+  const summary = page.locator('#agent-system summary');
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#agent-system')).toHaveAttribute('open', '');
+  await expect(page.getByText(/Automated checks require supporting evidence/)).toBeVisible();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#agent-system')).not.toHaveAttribute('open');
+});
+
+test('theme choice persists across reloads', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('./');
+  await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Switch to light mode' })).toBeVisible();
+  await page.getByRole('button', { name: 'Switch to light mode' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+});
+
+test('supports system dark preference without a saved choice', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+});
+
+test('restores direct and legacy section links without fragment errors', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  for (const [hash, target] of [['work', 'work'], ['lab', 'hallpass'], ['method', 'approach'], ['thesis', 'approach'], ['agent-system', 'agent-system']]) {
+    await page.goto(`./#${hash}`);
+    await expect.poll(() => page.locator(`#${target}`).evaluate((el) => Math.abs(el.getBoundingClientRect().top))).toBeLessThan(200);
+  }
+  await expect(page.locator('#agent-system')).toHaveAttribute('open', '');
+  await page.goto('./#%');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('mobile navigation closes on Escape and moves focus on selection', async ({ page, isMobile }) => {
+  test.skip(!isMobile);
+  await page.goto('./');
+  await page.getByRole('button', { name: 'Open menu' }).click();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button', { name: 'Open menu' })).toBeFocused();
+  await page.getByRole('button', { name: 'Open menu' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'HallPass', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Open menu' })).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#hallpass')).toBeFocused();
+});
+
+test('has no horizontal overflow on narrow, tablet, and desktop layouts', async ({ page }) => {
+  await page.goto('./');
+  for (const width of [320, 375, 768, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  }
+});
+
+test('light and dark views meet accessibility checks', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
+  await page.goto('./');
+  for (const theme of ['light', 'dark']) {
+    if (theme === 'dark') await page.getByRole('button', { name: 'Switch to dark mode' }).click();
+    await page.locator('#agent-system summary').click();
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+    expect(results.violations).toEqual([]);
+  }
+});
+
+test('resume and existing case-file URLs remain usable', async ({ page, request }) => {
+  const response = await request.get('./Kingsley-Okoli-Public-Resume.pdf');
+  expect(response.ok()).toBe(true);
+  expect((await response.body()).subarray(0, 4).toString()).toBe('%PDF');
+  await page.goto('./case-files/index.html#agent-system');
+  await expect(page.locator('#agent-system').getByRole('heading')).toHaveText('Putting testing expertise into an agent harness.');
+  await page.goto('./Kingsley-Okoli-Public-Resume.html');
+  await expect(page.getByRole('heading', { name: 'HallPass' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Sellfire' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Rapptr Labs' })).toBeVisible();
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations.filter((item) => ['serious', 'critical'].includes(item.impact))).toEqual([]);
+});
+
+test('core information is usable without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4188/portfolio-website/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('AI Reliability Engineer');
-  await expect(page.getByRole('link', { name: 'Open the public résumé' })).toHaveAttribute(
-    'href',
-    './Kingsley-Okoli-Public-Resume.pdf'
-  );
+  await page.goto(baseURL);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('I build the systems behind reliable software.');
+  await expect(page.getByRole('link', { name: 'Visit HallPass' })).toHaveAttribute('href', 'https://hallpass.me');
+  await expect(page.getByRole('link', { name: 'View résumé' })).toBeVisible();
   await context.close();
-});
-
-test('motion control is operable', async ({ page }) => {
-  await page.goto('./');
-  const control = page.getByRole('button', { name: 'Pause motion' });
-  await expect(control).toBeVisible();
-  await control.click();
-  await expect(page.getByRole('button', { name: 'Resume motion' })).toBeVisible();
-  await expect(page.locator('.site')).toHaveClass(/motion-off/);
-});
-
-test('desktop reliability-core status is fully inside the viewport', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === 'mobile');
-  await page.goto('./');
-  const viewport = page.viewportSize();
-  const box = await page.getByText('Reliability core online').boundingBox();
-  expect(box.x + box.width).toBeLessThanOrEqual(viewport.width - 16);
-});
-
-test('shared section deep links land on the requested content', async ({ page }) => {
-  await page.goto('./#work');
-  await expect.poll(
-    () => page.locator('#work').evaluate((element) => Math.abs(element.getBoundingClientRect().top)),
-    { timeout: 2_000 }
-  ).toBeLessThan(150);
-});
-
-test('malformed URL fragments do not raise runtime errors', async ({ page }) => {
-  const pageErrors = [];
-  page.on('pageerror', (error) => pageErrors.push(error.message));
-  await page.goto('./#%');
-  await page.waitForTimeout(600);
-  expect(pageErrors).toEqual([]);
-  await expect(page.getByRole('heading', { level: 1, name: 'AI Reliability Engineer' })).toBeVisible();
-});
-
-test('every case-study receipt opens its matching sanitized case file', async ({ page }) => {
-  const receipts = [
-    ['agent-system', 'Teaching an AI agent an entire SaaS platform'],
-    ['ci-signal', 'Restoring trust after nineteen red days'],
-    ['production-forensics', 'Finding failures no single monitor could see'],
-  ];
-
-  for (const [id, heading] of receipts) {
-    await page.goto('./');
-    await page.locator(`a[href="./case-files/index.html#${id}"]`).click();
-    await expect(page).toHaveURL(new RegExp(`/case-files/index\\.html#${id}$`));
-    await expect(page.locator(`#${id}`).getByRole('heading', { name: heading })).toBeVisible();
-  }
-});
-
-test('sanitized case files have no serious accessibility violations', async ({ page }) => {
-  await page.goto('./case-files/index.html#ci-signal');
-  const results = await new AxeBuilder({ page }).analyze();
-  const serious = results.violations.filter((item) => ['serious', 'critical'].includes(item.impact));
-  expect(serious, JSON.stringify(serious, null, 2)).toEqual([]);
-});
-
-test('fast scrolling never leaves thesis copy transparent', async ({ page }) => {
-  await page.goto('./');
-  await page.locator('#thesis').scrollIntoViewIfNeeded();
-  const opacity = await page.locator('.thesis__copy').evaluate((element) => Number(getComputedStyle(element).opacity));
-  expect(opacity).toBeGreaterThanOrEqual(0.9);
-});
-
-test('has no serious accessibility violations', async ({ page }) => {
-  await page.goto('./');
-  const results = await new AxeBuilder({ page }).analyze();
-  const serious = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact));
-  expect(serious).toEqual([]);
-});
-
-test('mobile navigation works and the document does not overflow', async ({ page, isMobile }) => {
-  test.skip(!isMobile, 'mobile-only behavior');
-  await page.goto('./');
-
-  const viewport = page.viewportSize();
-  const primaryCta = page.getByRole('link', { name: 'Explore the systems' });
-  const ctaBox = await primaryCta.boundingBox();
-  expect(ctaBox.y + ctaBox.height).toBeLessThanOrEqual(viewport.height);
-
-  for (const buttonName of ['Pause motion', 'Open menu']) {
-    const box = await page.getByRole('button', { name: buttonName }).boundingBox();
-    expect(box.x).toBeGreaterThanOrEqual(0);
-    expect(box.x + box.width).toBeLessThanOrEqual(viewport.width);
-  }
-
-  await page.getByRole('button', { name: 'Open menu' }).click();
-  await expect(page.getByRole('link', { name: 'Work' })).toBeVisible();
-  await page.getByRole('link', { name: 'Work' }).click();
-  await expect(page.getByRole('button', { name: 'Open menu' })).toBeVisible();
-
-  const sizes = await page.evaluate(() => ({
-    viewport: document.documentElement.clientWidth,
-    document: document.documentElement.scrollWidth,
-  }));
-  expect(sizes.document).toBeLessThanOrEqual(sizes.viewport + 1);
 });
