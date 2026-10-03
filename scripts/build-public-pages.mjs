@@ -28,5 +28,3 @@ const cases = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta 
 </style></head><body><header><a href="../">Kingsley Okoli / Portfolio</a></header><main><h1>Selected work</h1><p class="intro">How I build and operate testing infrastructure, direct AI-assisted testing, and investigate production failures.</p>${caseStudies.map((study) => `<article id="${study.id}"><p class="category">${escape(study.category)}</p><h2>${escape(study.title)}</h2>${study.paragraphs.map((paragraph) => `<p>${escape(paragraph)}</p>`).join('')}</article>`).join('')}</main><footer><a href="../#contact">Get in touch</a></footer></body></html>`;
 writeFileSync(new URL('../public/case-files/index.html', import.meta.url), cases);
 console.log('Updated public resume HTML and compatible case-study pages.');
-
-
