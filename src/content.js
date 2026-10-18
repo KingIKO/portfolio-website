@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Kingsley Okoli',
-  role: 'QA engineer',
-  location: 'New York City',
+  role: 'QA Lead | Director of QA, AI Quality Engineering',
+  location: 'Manhattan, NY',
   email: 'kingsleyiokoli@gmail.com',
   linkedin: 'https://www.linkedin.com/in/kingsley-okoli',
   github: 'https://github.com/KingIKO',
@@ -16,7 +16,7 @@ export const caseStudies = [
     paragraphs: [
       'As the sole QA engineer, I own test planning, browser and API automation, production investigation, and release approval. I built the infrastructure that lets me carry that responsibility across the application.',
       'The Playwright and TypeScript framework covers three user roles. Parallel CI machines share authentication, while tests that use the same data run on the same machine. Unstable tests are isolated until they pass independently.',
-      'I also built daily API checks in Postman with automated reporting. The responsibility extends beyond running tests: I maintain the framework as the product changes and investigate failures before making release decisions.',
+      'Browser and API automation feed the same release decision. The responsibility extends beyond running tests: I maintain the framework as the product changes and investigate failures before making release decisions.',
     ],
   },
   {
@@ -25,7 +25,7 @@ export const caseStudies = [
     title: 'Putting testing expertise into an agent harness.',
     summary: 'Application knowledge, custom tools, and evidence requirements that let me direct AI testing while retaining engineering judgment.',
     paragraphs: [
-      'I built a custom harness around Claude Code to work from a supplied ticket. Documented workflows give the agent application context, and a custom Model Context Protocol (MCP) server gives it tools to interact with the browser.',
+      'I built a custom AI agent harness for testing. Documented workflows give the agent application context, and custom browser tools let it interact with the application directly.',
       'Automated checks require supporting evidence before accepting a passing result. Those requirements are part of the system I designed around the model, alongside the knowledge and tools it needs to test the application.',
       'I use this harness as part of the QA function I operate. I remain responsible for test strategy, production investigation, and release decisions.',
     ],
@@ -60,9 +60,15 @@ export const projects = [
 export const experience = [
   {
     company: 'Sellfire',
-    role: 'QA Engineer',
+    role: 'QA Lead',
     dates: 'Aug 2025 - present',
-    description: 'Sole QA engineer. Built and operate the testing infrastructure and AI harness supporting company-wide quality assurance.',
+    description: 'Sole QA engineer, promoted from QA Engineer in October 2026. Built and operate the testing infrastructure and AI harness supporting company-wide quality assurance.',
+  },
+  {
+    company: 'Rapptr Labs',
+    role: 'Director of QA, AI Quality Engineering',
+    dates: 'Oct 2026 - present',
+    description: 'Part-time contract alongside the Sellfire role. Leading development of an AI-assisted QA offering and defining testing standards across client projects.',
   },
   {
     company: 'Rapptr Labs',

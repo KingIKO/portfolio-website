@@ -15,7 +15,7 @@ describe('portfolio', () => {
     expect(within(projects).getAllByRole('article')).toHaveLength(1);
     expect(within(projects).getByRole('link', { name: /visit hallpass/i })).toHaveAttribute('href', 'https://hallpass.me');
     expect(screen.getByRole('heading', { name: 'Sellfire' })).toBeVisible();
-    expect(screen.getAllByRole('heading', { name: 'Rapptr Labs' })).toHaveLength(2);
+    expect(screen.getAllByRole('heading', { name: 'Rapptr Labs' })).toHaveLength(3);
   });
 
   it('persists the theme preference and restores it on the next visit', () => {

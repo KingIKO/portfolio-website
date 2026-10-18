@@ -96,7 +96,7 @@ export default function App() {
 
       <main id="main" tabIndex={-1}>
         <section className="hero reading-column" id="top" aria-labelledby="hero-title">
-          <p className="intro-line">QA engineer <span aria-hidden="true">/</span> New York City</p>
+          <p className="intro-line">QA Lead <span aria-hidden="true">/</span> Director of QA, AI Quality Engineering <span aria-hidden="true">/</span> Manhattan, NY</p>
           <h1 id="hero-title">I build the systems behind reliable software.</h1>
           <div className="hero-introduction">
             <img src="./headshot.jpg" alt="Kingsley Okoli" width="88" height="88" fetchPriority="high" />
